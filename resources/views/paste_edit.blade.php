@@ -18,12 +18,12 @@
             @csrf
       		<!-- paste id -->
             <input name="id" value="{{ $paste->id }}" style="display: none"/>
-            <div class="card" style="padding: 10px 20px">
+            <div class="card" style="padding: 10px 20px; border: 1px solid #efefef">
                 <div>
                     Edit Paste
                 </div>
                 <div style="margin-top: 10px">
-                    <div style="display: inline-block; width: calc(100% - 82px)">
+                    <div style="display: inline-block; width: calc(100% - 140px)">
                         <input 
                             name="paste_title" 
                             class="pb-input" 
@@ -32,12 +32,21 @@
                             placeholder="Title" />
                     </div>
                     <div style="display: inline-block">
-                        <a href="javascript:void(0)" onclick="pb_copy('pb-textarea')">
+                        <a href="javascript:void(0)" onclick="pb_copy('pb-textarea', document.getElementById('pb-paste-copy-multiplier').innerHTML)">
                             <i class="fa fa-clone"></i>
                         </a>
                     </div>
                     <div style="display: inline-block">
-                        <a href="javascript:void(0)" onclick="pb_copy('pb-input-link-{{ $paste->id }}')">
+                        x
+                        <select onchange="pb_select_copy_multiplier(this, 'pb-paste-copy-multiplier')">
+                            @for ($i = 1; $i <= 15; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                        <span id="pb-paste-copy-multiplier" style="display: none">1</span>
+                    </div>
+                    <div style="display: inline-block">
+                        <a href="javascript:void(0)" onclick="pb_copy('pb-input-link-{{ $paste->id }}', 1)">
                             <i class="fa fa-link"></i>
                         </a>
                     </div>

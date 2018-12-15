@@ -34,6 +34,9 @@
 
     <!-- Custom CSS -->
     <style>
+        body {
+            background-color: #ccc;
+        }
         a {
             color: black;
             text-decoration: none;
@@ -49,7 +52,7 @@
         .pb-input {
             width: 100%; 
             padding: 5px 10px;
-            border: 1px solid #dfdfdf;
+            border: 1px solid #ccc;
         }
         .pb-textarea {
             width: 100%; 
@@ -57,13 +60,13 @@
             padding: 10px;
             font-family: Monaco;
             font-size: 12px;
-            border: 1px solid #dfdfdf;
+            border: 1px solid #ccc;
         }
         .pb-button {
             padding: 5px; 
             background-color: white; 
             border-radius: 5px; 
-            border: 1px solid #dfdfdf;
+            border: 1px solid #eee;
         }
     </style>
 </head>
@@ -170,16 +173,28 @@
 
         }
 
-        function pb_copy(id) {
+        function pb_copy(id, copyMultipler) {
+
             
             let copyFrom = document.createElement("textarea");
             document.body.appendChild(copyFrom);
-            copyFrom.textContent = $('#' + id).val();
+
+            //copyFrom.textContent = $('#' + id).val();
+            copyFrom.textContent = "";
+            for(var i = 0 ; i < copyMultipler ; i++){
+                copyFrom.textContent += $('#' + id).val() + '\n';
+            }        
+
             copyFrom.select();
             document.execCommand("copy");
             copyFrom.remove();
-            alert('Copied!');
 
+        }
+
+        function pb_select_copy_multiplier(o, id){
+
+            document.getElementById(id).innerHTML = o.value;
+        
         }
 
         function pb_delete_paste(id) {

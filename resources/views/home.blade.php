@@ -15,7 +15,7 @@
                 width: calc(100% - 40px); 
                 margin: 0px; 
                 margin-left: 2px;
-                border: 1px solid #dfdfdf; 
+                border: 1px solid #eee; 
                 border-radius: 5px
             "
             onkeyup="pb_search()" />
@@ -25,23 +25,32 @@
     <div class="pb-paste" style="margin-bottom: 5px">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" style="padding: 10px 20px">
+                <div class="card" style="padding: 10px 20px; border: 1px solid #eee">
                     <div>
                         <a 
                             class="pb-paste-title"
                             href="javascript:void(0)"
-                            style="display: inline-block; width: calc(100% - 82px)"
+                            style="display: inline-block; width: calc(100% - 140px)"
                             data-toggle="collapse" 
                             data-target="#collapse{{ $paste->id }}">
                             {{ $paste->title }}
                         </a>
                         <div style="display: inline-block">
-                            <a href="javascript:void(0)" onclick="pb_copy('pb-textarea-{{ $paste->id }}')">
+                            <a href="javascript:void(0)" onclick="pb_copy('pb-textarea-{{ $paste->id }}', document.getElementById('pb-paste-copy-multiplier-{{ $paste->id }}').innerHTML)">
                                 <i class="fa fa-clone"></i>
                             </a>
                         </div>
                         <div style="display: inline-block">
-                            <a href="javascript:void(0)" onclick="pb_copy('pb-input-link-{{ $paste->id }}')">
+                            x
+                            <select onchange="pb_select_copy_multiplier(this, 'pb-paste-copy-multiplier-{{ $paste->id }}')">
+                                @for ($i = 1; $i <= 15; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                            <span id="pb-paste-copy-multiplier-{{ $paste->id }}" style="display: none">1</span>
+                        </div>
+                        <div style="display: inline-block">
+                            <a href="javascript:void(0)" onclick="pb_copy('pb-input-link-{{ $paste->id }}', 1)">
                                 <i class="fa fa-link"></i>
                             </a>
                         </div>
