@@ -15,6 +15,12 @@ class PasteController extends Controller
         $this->middleware('auth');
     }
 
+    public function encodeCurlyBraces($input){
+        $output = str_replace('{', '&#123;', $input);
+        $output = str_replace('}', '&#125;', $output);
+        return $output;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,8 +60,8 @@ class PasteController extends Controller
 
         $paste = new Paste;
 
-        $paste->title = $request['paste_title'];
-        $paste->content = $request['paste_content'];
+        $paste->title = $this->encodeCurlyBraces($request['paste_title']);
+        $paste->content = $this->encodeCurlyBraces($request['paste_content']);
         $paste->user_id = Auth::id();
         $paste->save();
 
@@ -152,8 +158,8 @@ class PasteController extends Controller
 
             if($paste->user_id == Auth::id()){
 
-                $paste->title = $request['paste_title'];
-                $paste->content = $request['paste_content'];
+                $paste->title = $this->encodeCurlyBraces($request['paste_title']);
+                $paste->content = $this->encodeCurlyBraces($request['paste_content']);
                 $paste->save();
 
             }

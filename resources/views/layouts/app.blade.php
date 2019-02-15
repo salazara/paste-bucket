@@ -182,7 +182,7 @@
             //copyFrom.textContent = $('#' + id).val();
             copyFrom.textContent = "";
             for(var i = 0 ; i < copyMultipler ; i++){
-                copyFrom.textContent += $('#' + id).val() + '\n';
+                copyFrom.textContent += pb_decode_curly_braces($('#' + id).val()) + '\n';
             }        
 
             copyFrom.select();
@@ -218,6 +218,10 @@
 
             }
 
+        }
+
+        function pb_decode_curly_braces(input){
+            return input.replace(/&#123;/g, '{').replace(/&#125;/g, '}');
         }
     </script>
 </body>

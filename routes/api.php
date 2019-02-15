@@ -15,13 +15,8 @@ use Illuminate\Http\Request;
 
 
 // UserController is located inside the API folder under app->Http->Controllers
-/*
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
-
 Route::group(['middleware' => 'auth:api'], function(){
-
 	Route::get('details', 'API\UserController@details');
-
 });
-*/
